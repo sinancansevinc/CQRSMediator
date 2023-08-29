@@ -26,12 +26,29 @@ namespace CQRSMediator.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetById")]
         public async Task<IActionResult> GetProductById([FromQuery] GetByIdProductQueryRequest request)
         {
             var product = await _mediator.Send(request);
             
             return Ok(product);
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromQuery] DeleteProductCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateProductCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return Ok(response);
+        }
+
+
     }
 }
